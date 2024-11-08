@@ -28,5 +28,5 @@ jobs:
       - name: Executando testes de cobertura
         run: npm run test:coverage		
 
-      - name: Iniciando aplicação
+      - name: Rodando a aplicação
         run: npm start
