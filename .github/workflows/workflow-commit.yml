@@ -54,5 +54,5 @@ jobs:
       - name: Executando testes
         run: npm run test
 
-      - name: Executando testes de validação
-        run: npm run test:validate  # Você pode ter um conjunto de testes para apenas validar PRs
+      - name: Executando testes de cobertura
+        run: npm run test:coverage
