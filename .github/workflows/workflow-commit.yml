@@ -34,8 +34,6 @@ jobs:
       - name: Executando testes de cobertura
         run: npm run test:coverage
 
-      - name: Rodando a aplicação
-        run: npm start
 
   pr-check:
     runs-on: ubuntu-latest
@@ -53,8 +51,8 @@ jobs:
       - name: Instalando dependências do projeto
         run: npm install
 
-      - name: Rodando validações de PR
-        run: npm run lint  # Exemplo de uma validação, como linting de código ou pré-testes
+      - name: Executando testes
+        run: npm run test
 
       - name: Executando testes de validação
         run: npm run test:validate  # Você pode ter um conjunto de testes para apenas validar PRs
