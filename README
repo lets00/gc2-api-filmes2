@@ -1,0 +1,42 @@
+Requisitos
+
+Instalar o Vagrant
+Instalar o VirtualBox
+Passos para Executar a Infraestrutura
+
+1. Clone o repositório
+Primeiro, clone o repositório para o seu ambiente local:
+
+git clone 
+2. Inicialize as Máquinas Virtuais
+
+vagrant up
+
+Esse comando irá:
+
+
+3. Verifique o Status das Máquinas Virtuais
+
+vagrant status
+
+4. Acesse a Rota GET da VM1
+
+Usando curl:
+
+Execute o comando abaixo para fazer uma requisição GET para o IP da VM1 (192.168.56.10):
+
+curl http://192.168.56.10:8000
+Usando wget:
+
+Alternativamente, você pode usar o wget:
+
+wget http://192.168.56.10:8000
+
+5. Verifique a Resposta
+Se a aplicação estiver funcionando corretamente, você deve ver uma resposta da API no terminal. Se a resposta for válida, isso indica que a infraestrutura está configurada corretamente e a rota GET está acessível.
+
+Parar as Máquinas Virtuais
+
+Quando terminar de testar, você pode parar as máquinas virtuais com o seguinte comando:
+
+vagrant halt
