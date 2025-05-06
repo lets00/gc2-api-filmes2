@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clonar o projeto e fazer checkout
-        action: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Instalar o nodeJS
-        action: actions/setup-node@3
+        uses: actions/setup-node@3
         with:
           node-version: 22
       
