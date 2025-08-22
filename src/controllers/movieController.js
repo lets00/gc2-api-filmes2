@@ -35,8 +35,13 @@ const movies = [
   {
     id: 6,
     name: "Outro Filme",
-    year: 2025
-  }
+    year: 2025,
+  },
+  {
+    id: 7,
+    name: "Outro Filme",
+    year: 2025,
+  },
 ];
 
 export function findAllMovies(req, res) {
