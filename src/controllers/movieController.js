@@ -39,7 +39,7 @@ const movies = [
   },
   {
     id: 7,
-    name: "Outro Filme",
+    name: "Outro Filme2",
     year: 2025,
   },
 ];
