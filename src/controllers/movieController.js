@@ -32,6 +32,11 @@ const movies = [
     name: "Tropa de Elite",
     year: 2007,
   },
+  {
+    id: 6,
+    name: "Outro Filme",
+    year: 2025
+  }
 ];
 
 export function findAllMovies(req, res) {
