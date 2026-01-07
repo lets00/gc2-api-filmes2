@@ -34,13 +34,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      - name: Login to Harbor
-        uses: docker/login-action@v3
-        with:
-          registry: harbor.starfishcloud.com.br/gc2-filmes/
-          username: ${{ secrets.HARBOR_USERNAME }}
-          password: ${{ secrets.HARBOR_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -48,6 +41,19 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: 
-            - lesilva00/gc2-filmes:latest
-            - luis.silva/gc2-filmes:latest
+          tags: lesilva00/gc2-filmes:latest
+      
+      - name: Login to Harbor
+        uses: docker/login-action@v3
+        with:
+          registry: harbor.starfishcloud.com.br/gc2-filmes/
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_TOKEN }}
+      
+      - name: Build and push Docker image into Harbor
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: gc2-filmes:latest
