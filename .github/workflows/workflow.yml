@@ -1,0 +1,44 @@
+name: workflow-principal
+run-name: wokflow principal sendo executado
+on:
+  push:
+jobs:
+  executa-testes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Realiza o clone do repositório e muda para a branch correta (checkout)
+        uses: actions/checkout@v5
+      
+      - name: Instalar o node na versão 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      - name: Instalar as dependências
+        run: npm ci
+
+      - name: Executar testes
+        run: npm test
+  build-and-push:
+    needs: executa-testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: lesilva00/gc2-filmes:latest
