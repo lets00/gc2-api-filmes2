@@ -53,6 +53,7 @@ jobs:
       - name: Build and push Docker image into Harbor
         uses: docker/build-push-action@v5
         with:
+          registry: harbor.starfishcloud.com.br/gc2-filmes/
           context: .
           file: ./Dockerfile
           push: true
