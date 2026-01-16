@@ -1,0 +1,58 @@
+name: Workflow para Verificar Commits e Pull Requests
+run-name: ${{ github.actor }} está enviando um novo commit ou pull request
+
+on:
+  push:
+    branches:
+      - develop  # O workflow será acionado apenas para pushs na branch 'develop'
+  pull_request:
+    branches:
+      - main  # O workflow será acionado apenas para PRs contra a branch 'main'
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Clonando o repositório e trocando para a branch correta
+        uses: actions/checkout@v4
+
+      - name: Instalando o Node.js versão 21
+        uses: actions/setup-node@v3
+        with:	
+          node-version: '21'
+
+      - name: Instalando a dependência BATS globalmente
+        run: npm install -g bats
+
+      - name: Instalando dependências do projeto
+        run: npm install
+
+      - name: Executando testes
+        run: npm run test
+
+      - name: Executando testes de cobertura
+        run: npm run test:coverage
+
+
+  pull-request:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'  # Esse job só será executado para Pull Requests
+
+    steps:
+      - name: Clonando o repositório para a verificação do PR
+        uses: actions/checkout@v4
+
+      - name: Instalando o Node.js versão 21
+        uses: actions/setup-node@v3
+        with:	
+          node-version: '21'
+
+      - name: Instalando dependências do projeto
+        run: npm install
+
+      - name: Executando testes
+        run: npm run test
+
+      - name: Executando testes de cobertura
+        run: npm run test:coverage
